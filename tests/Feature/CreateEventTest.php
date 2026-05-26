@@ -9,6 +9,7 @@ use Carbon\Carbon;
 
 class CreateEventTest extends TestCase
 {
+    use RefreshDatabase;
     /**
      * A basic feature test example.
      */
