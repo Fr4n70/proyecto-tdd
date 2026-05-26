@@ -4,20 +4,14 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Event;
+use App\Http\Requests\StoreEventRequest;
+use Illuminate\Http\RedirectResponse;
 
 class EventController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreEventRequest $request): RedirectResponse
     {
-        // $eventData = $request->all();
-
-        $eventData = $request->validate([
-            'name' => 'required|string|max:255',
-            'featured' => 'required|string|max:255',
-            'date' => 'required|date',
-            'time' => 'required|date_format:H:i:s',
-            'location' => 'required|string|max:255'
-        ]);
+        $eventData = $request->all();
 
         Event::create($eventData);
 
