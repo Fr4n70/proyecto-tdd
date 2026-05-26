@@ -11,9 +11,6 @@ use App\Models\Event;
 class UpdateEventTest extends TestCase
 {
     use RefreshDatabase;
-    /**
-     * A basic feature test example.
-     */
 
     protected $event;
 
@@ -21,7 +18,6 @@ class UpdateEventTest extends TestCase
     {
         parent::setUp();
 
-        //crear evento
         $this->event = Event::create([
             'name' => 'Evento actializado',
             'featured' => 'evento3.png',
@@ -31,19 +27,18 @@ class UpdateEventTest extends TestCase
         ]);
     }
 
-    public function test_example(): void
+    public function test_update_event(): void
     {
         //Arrange
         $updatedData = [
             'name' => 'Evento actualizado',
-            
         ];
 
         //Act
         $response = $this->put('/events/' . $this->event->id, $updatedData);
 
         //Assert
-        $response->assertStatus(200);
+        $response->assertStatus(302);
         $this->assertDatabaseHas('events', $updatedData);
     }
 }

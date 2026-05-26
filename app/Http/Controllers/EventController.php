@@ -3,17 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
-use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\Event;
 use App\Http\Requests\StoreEventRequest;
 
-
-
-
 class EventController extends Controller
 {
-
     public function index()
     {
         $events = Event::all();
@@ -22,10 +17,14 @@ class EventController extends Controller
 
     public function store(StoreEventRequest $request): RedirectResponse
     {
-        $eventData = $request->all();
+        $validatedData = $request->all();
+        Event::create($validatedData);
+        return redirect()->route('events.index');
+    }
 
-        Event::create($eventData);
-
+    public function update(Request $request, Event $event): RedirectResponse
+    {
+        $event->update($request->all());
         return redirect()->route('events.index');
     }
 }
