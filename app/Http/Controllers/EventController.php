@@ -27,4 +27,9 @@ class EventController extends Controller
         $event->update($request->all());
         return redirect()->route('events.index');
     }
+    
+    public function destroy(Event $event): RedirectResponse
+    {
+        $event->delete();
+    }
 }
